@@ -40,7 +40,7 @@ public class Main {
                                             //Nome: Jornal das 5, Tipo: Publicacao, Ano: 2005
 
 
-        Publicacao publicacao1 = artigo1.getPublicacao();
+
         // Adiciona artigos às publicações
         System.out.println("\nAutores na base de dados:");
         for (Autor autor : bd.autores()) {
