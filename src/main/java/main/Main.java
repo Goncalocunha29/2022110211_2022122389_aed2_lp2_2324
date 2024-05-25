@@ -4,22 +4,24 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        BaseDados bd = new BaseDados();
+        BaseDados bd = new BaseDados(); // Cria uma base de dados
         Autor autor1 = new Autor("Nome1", "Nome Curto 1", "Nome Cientifico",
                 "filiacao 1", "orcid1" ,"cienciaID1", "googleScholarID1",
                 "scopusAuthorID1");
         Autor autor2 = new Autor("Autor Dois", "A. Dois", "Autor D.",
                 "Instituição Y", "ORCID2", "CienciaID2", "GoogleScholarID2",
                 "ScopusAuthorID2");
-        bd.adicionaAutor(autor1);
+        bd.adicionaAutor(autor1); // Adiciona autores à base de dados
         bd.adicionaAutor(autor2);
 
-        journal journal1 = new journal("Manuel dos Santos", "2023", 200, 2003, "Jornal das 5", 2005);
-        conferencia conferencia1 = new conferencia(200, "Porto", "A vida do maluco", 1983);
+
+        journal journal1 = new journal("Manuel dos Santos", "2023", 200,
+                2003, "Jornal das 5", 2005); // Cria publicações
+        conferencia conferencia1 = new conferencia(200, "Porto", "A vida do maluco", 1983); // Cria publicações
 
 
         Artigo artigo1 = new Artigo("Titulo1", Arrays.asList("Palavras1", "Palavras2"), "Resumo1",
-                "Tipo1", 2024, 100);
+                "Tipo1", 2024, 100); // Cria artigos
         Artigo artigo2 = new Artigo("Titulo2", Arrays.asList("Palavras3", "Palavras4"), "Resumo2",
                 "Tipo2", 2003, 500);
 
@@ -38,21 +40,24 @@ public class Main {
                                             //Nome: Jornal das 5, Tipo: Publicacao, Ano: 2005
 
 
+        Publicacao publicacao1 = artigo1.getPublicacao();
+        // Adiciona artigos às publicações
         System.out.println("\nAutores na base de dados:");
         for (Autor autor : bd.autores()) {
-            System.out.println("Nome: " + autor.getNome() + ", ORCID: " + autor.getOrcid());
+            System.out.println("Nome: " + autor.getNome() + ", ORCID: " + autor.getOrcid()); //Nome: Nome1, ORCID: orcid1
+                                                                                             //Nome: Autor Dois, ORCID: ORCID2
         }
 
 
         System.out.println("\nArtigos na base de dados:");
         for (Artigo artigo : bd.listarArtigos()) {
             if (artigo.getPublicacao() != null) {
-                System.out.println(artigo.getTitulo() + " - Publicado em: " + artigo.getPublicacao().getNome());
+                System.out.println(artigo.getTitulo() + " - Publicado em: " + artigo.getPublicacao().getNome()); //Titulo1 - Publicado em: Porto
+                                                                                                                  //Titulo2 - Publicado em: Lisboa
             } else {
                 System.out.println(artigo.getTitulo() + " - Publicação não encontrada.");
             }
         }
-
 
 
         System.out.println("\nPublicações:");
@@ -65,6 +70,8 @@ public class Main {
                 }
             }
         }
+
+
 
     }
 }
