@@ -64,6 +64,7 @@ public class BaseDados {
     }
 
 
+
     // Métodos para gerenciar publicações
     public void inserirPublicacao(Publicacao publicacao){
         publicacoes.put(publicacao.getNome(), publicacao);

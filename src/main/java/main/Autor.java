@@ -100,4 +100,5 @@ public class Autor {
     public void adicionarArtigo(Artigo artigo) {
         artigos.add(artigo);
     }
+
 }

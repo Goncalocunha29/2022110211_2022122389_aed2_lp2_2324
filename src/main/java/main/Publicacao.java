@@ -58,6 +58,7 @@ import java.util.ArrayList;
 
 
 
+
 //------------------------------Journal-----------------------------------//
 class journal extends Publicacao {
     private String publisher;
