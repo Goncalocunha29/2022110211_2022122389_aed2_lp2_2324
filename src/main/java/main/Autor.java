@@ -12,6 +12,7 @@ public class Autor {
     private String googleScholarID;
     private String scopusAuthorID;
     private List<Artigo> artigos;
+    private String Id;
 
     public Autor (String nome, String nomeCurto, String nomeCientifico, String filiacao,
                   String orcid, String cienciaID, String googleScholarID, String scopusAuthorID){
@@ -99,6 +100,14 @@ public class Autor {
 
     public void adicionarArtigo(Artigo artigo) {
         artigos.add(artigo);
+    }
+
+    public void removerArtigo(Artigo artigo) {
+        artigos.remove(artigo);
+    }
+
+    public String getId() {
+        return Id;
     }
 
 }

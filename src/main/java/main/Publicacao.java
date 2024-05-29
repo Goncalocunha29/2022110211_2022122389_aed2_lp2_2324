@@ -54,6 +54,7 @@ import java.util.ArrayList;
         public void removerArtigo(Artigo artigo) {
             artigos.remove(artigo);
         }
+        public abstract String getLocal();
     }
 
 
@@ -65,13 +66,15 @@ class journal extends Publicacao {
     private String periodicidade;
     private float jcrIF;
     private float scopusIF;
+    private String local;
 
-    public journal(String publisher, String periodicidade, float jcrIF, float scopusIF, String nome, int ano){
+    public journal(String publisher, String periodicidade, float jcrIF, float scopusIF, String local ,String nome, int ano){
         super(nome, ano);
         this.publisher = publisher;
         this.periodicidade = periodicidade;
         this.jcrIF = jcrIF;
         this.scopusIF = scopusIF;
+        this.local = local;
     }
     public String getPublisher() {
         return publisher;
@@ -96,6 +99,9 @@ class journal extends Publicacao {
     }
     public void setScopusIF(float scopusIF) {
         this.scopusIF = scopusIF;
+    }
+    public String getLocal() {
+        return local;
     }
 
 }

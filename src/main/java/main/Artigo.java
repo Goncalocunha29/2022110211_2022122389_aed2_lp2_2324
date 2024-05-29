@@ -9,11 +9,13 @@ public class Artigo {
     private String tipoPublicacao;
     private int ano;
     private int numDownloads;
-    private Map<Date, Integer> numVisualDiarias;
-    private Map<Date, Integer> numLikesDiarios;
     private List<Autor> autores;
     private List<Artigo> artigos;
     private Publicacao publicacao;
+    private Map<String, Integer> visualizacoesMensais;
+    private Map<Integer, Integer> visualizacoesAnuais;
+    private int votos;
+    private String Id;
 
     public Artigo(String titulo, List<String> palavrasChave, String resumo,
                   String tipoPublicacao, int ano, int numDownloads) {
@@ -23,10 +25,11 @@ public class Artigo {
         this.tipoPublicacao = tipoPublicacao;
         this.ano = ano;
         this.numDownloads = numDownloads;
-        this.numVisualDiarias = new HashMap<>();
-        this.numLikesDiarios = new HashMap<>();
         this.autores = new ArrayList<>();
         this.artigos = new ArrayList<>();
+        this.visualizacoesMensais = new HashMap<>();
+        this.visualizacoesAnuais = new HashMap<>();
+        this.votos = 0;
     }
 
     public String getTitulo() {
@@ -76,6 +79,30 @@ public class Artigo {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public String getLocal() {
+        return publicacao != null ? publicacao.getLocal() : "Local não encontrado";
+    }
+
+    public void adicionarVoto() {
+        votos++;
+    }
+
+    public int getVisualizacoesMensais(String mesAno) {
+        return visualizacoesMensais.getOrDefault(mesAno, 100);
+    }
+
+    public int getVisualizacoesAnuais(int ano) {
+        return visualizacoesAnuais.getOrDefault(ano, 1200);
+    }
+
+    public int getVotos() {
+        return votos;
+    }
+
+    public String getId() {
+        return Id;
     }
 
 }
