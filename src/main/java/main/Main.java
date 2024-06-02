@@ -41,7 +41,8 @@ public class Main {
         artigo1.setPublicacao(journal1);
         artigo2.setPublicacao(conferencia1);// Adiciona artigos às publicações
 
-        artigo1.adicionarVoto(); // Adiciona likes aos artigos
+        artigo1.adicionarVoto();
+        artigo1.adicionarVoto();// Adiciona likes aos artigos
 
 
         // Adiciona publicações à base de dados
@@ -112,11 +113,26 @@ public class Main {
         //R4
         int anoInicio = 1982;
         int anoFim = 2025;
-        List<Artigo> artigosPorAutorPeriodo = bd.buscarArtigosPorAutorPeriodo(autor2, anoInicio, anoFim);
+        List<Artigo> artigosPorAutorPeriodo = bd.buscarArtigosPorAutorPeriodo(autor1, anoInicio, anoFim);
 
-        System.out.println("\nArtigos escritos por " + autor2.getNome() + " entre " + anoInicio + " e " + anoFim + ":");
+        System.out.println("\nArtigos escritos por " + autor1.getNome() + " entre " + anoInicio + " e " + anoFim + ":");
         for (Artigo artigo : artigosPorAutorPeriodo) {
             System.out.println("Titulo: " + artigo.getTitulo() + ", Ano: " + artigo.getAno());
+        }
+
+        // R4.2
+        artigo1.registaVisualizacao("2024-05");
+        List<Artigo> naoVisualizadosOuDescarregados = bd.artigosNaoVisualizadosOuDescarregados("2024-05");
+        System.out.println("\nArtigos não visualizados ou descarregados em 2024-05:");
+        for (Artigo artigo : naoVisualizadosOuDescarregados) {
+            System.out.println("Título: " + artigo.getTitulo());
+        }
+
+        // R4.3
+        List<Artigo> top3ArtigosMaisUsados = bd.top3ArtigosMaisUsados("2024-05");
+        System.out.println("\nTop 3 Artigos mais usados em 2024-05:");
+        for (Artigo artigo : top3ArtigosMaisUsados) {
+            System.out.println("Título: " + artigo.getTitulo() + ", Usos: " + artigo.getTotalUsosMensais("2024-05"));
         }
 
 
@@ -127,22 +143,9 @@ public class Main {
 
 
 
-        //---------------------------------R6----------------------------------//
-
-
-
-
-
-
-        //---------------------------------R7----------------------------------//
-
-
-
-
 
         //---------------------------------R8----------------------------------//
 
-        bd.gerarRelatorioGlobal();
 
         Citacao citacao1 = new Citacao("Autor Dois", "A cada artigo que publico sinto que ajudei alguem");
         Citacao citacao2 = new Citacao("Nome1", "A vida é um desafio, e eu estou disposto a enfrenta-lo");
@@ -154,7 +157,7 @@ public class Main {
         /*
         System.out.println("\nCitacoes:");
         for (Citacao citacao : bd.listarCitacoes()) {
-            System.out.println("Citacao: " + citacao.getTexto() + ", Autor: " + citacao.getAutor());
+            System.out.println("Citacao: "+ citacao.getTexto() + ", Autor: " + citacao.getAutor());
         }
 
 
@@ -166,8 +169,7 @@ public class Main {
                 Autor colaborador = bd.getAutor(colaboradorId);
                 System.out.println("  Colaborou com: " + colaborador.getNome());
             }
-        }
-        */
+        }*/
 
 
         //---------------------------------R9----------------------------------//

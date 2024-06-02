@@ -109,18 +109,40 @@ public class BaseDados {
         }
         return autoresRemovidos;
     }
-
+    //---------------------------------R4----------------------------------//
+    // R4.1
     public List<Artigo> buscarArtigosPorAutorPeriodo(Autor autor, int anoInicio, int anoFim) {
         List<Artigo> artigosEncontrados = new ArrayList<>();
         for (Map.Entry<Integer, List<Artigo>> entry : artigosPorAno.subMap(anoInicio, true, anoFim, true).entrySet()) {
             for (Artigo artigo : entry.getValue()) {
                 if (artigo.getAutores().contains(autor)) {
-                    artigosEncontrados.add(artigo);
+                    artigosEncontrados.add(artigo); // Adiciona artigo à lista de artigos encontrados
                 }
             }
         }
         return artigosEncontrados;
     }
+    // R4.2
+    public List<Artigo> artigosNaoVisualizadosOuDescarregados(String mesAno) {
+        List<Artigo> resultados = new ArrayList<>();
+        for (Artigo artigo : artigos.values()) {
+            if (!artigo.foiVisualizadoNoPeriodo(mesAno) && !artigo.foiDescarregadoNoPeriodo(mesAno)) {
+                resultados.add(artigo);
+            }
+        }
+        return resultados;
+    }
+
+
+
+    // R4.3
+    public List<Artigo> top3ArtigosMaisUsados(String mesAno) {
+        List<Artigo> todosArtigos = new ArrayList<>(artigos.values());
+        todosArtigos.sort((a1, a2) -> Integer.compare(a2.getTotalUsosMensais(mesAno), a1.getTotalUsosMensais(mesAno)));
+
+        return todosArtigos.size() > 3 ? todosArtigos.subList(0, 3) : todosArtigos;
+    }
+
 
     //---------------------------------R5----------------------------------//
     public void gerarRelatorioGlobal() {
@@ -156,12 +178,6 @@ public class BaseDados {
         }
     }
 
-    //---------------------------------R6----------------------------------//
-
-
-    //---------------------------------R7----------------------------------//
-
-
 
     //---------------------------------R8----------------------------------//
     public Artigo getArtigo(String titulo) {
@@ -194,8 +210,7 @@ public class BaseDados {
         List<Citacao> todasCitacoes = new ArrayList<>();
         for (Artigo artigo : listarArtigos()) {
             for (Citacao citacao : grafoArtigo.citacoes(Integer.parseInt(artigo.getId()))) {
-                todasCitacoes.add(citacao);
-                // Retorna as citacoes do vertice v
+                todasCitacoes.add(citacao); // Retorna as citacoes do vertice v
             }
         }
         return todasCitacoes;

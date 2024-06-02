@@ -13,7 +13,7 @@ public class Testes {
         Autor autor1 = new Autor("João Silva", "J. Silva", "João Silva", "Universidade do Minho",
                 "0000-0002-1825-0097", "0000-0002-1825-0097", "0000-0002-1825-0097", "0000-0002-1825-0097");
 
-        Autor autor2 = new Autor("Maria", "M. Silva", "Maria Silva", "Universidade do Porto",
+        Autor autor2 = new Autor("Maria Fernandes Silva", "M. Silva", "Maria Silva", "Universidade do Porto",
                 "0000-0002-1825-0098", "0000-0002-1825-0098", "0000-0002-1825-0098", "0000-0002-1825-0098");
 
         bd.adicionaAutor(autor1);
@@ -39,6 +39,7 @@ public class Testes {
         bd.inserirPublicacao(journal1);
         bd.inserirPublicacao(conferencia1);
 
+        artigo1.adicionarVoto();
         artigo1.adicionarVoto();
         artigo1.adicionarVoto();
 
@@ -73,10 +74,6 @@ public class Testes {
             System.out.println("Nome: " + autor.getNome() + ", ORCID: " + autor.getOrcid());
         }
 
-        System.out.println("\nAutores removidos:");
-        for (String nomeCurto : bd.listarAutoresRemovidos()) {
-            System.out.println("Nome Curto: " + nomeCurto);
-        }
 
         System.out.println("\nArtigos na base de dados após remoção de autor:");
         for (Artigo artigo : bd.listarArtigos()) {
@@ -86,7 +83,7 @@ public class Testes {
             }
         }
 
-        int anoInicio = 2002;
+        int anoInicio = 2022;
         int anoFim = 2025;
         List<Artigo> artigosPorAutorPeriodo = bd.buscarArtigosPorAutorPeriodo(autor2, anoInicio, anoFim);
 
@@ -94,6 +91,47 @@ public class Testes {
         for (Artigo artigo : artigosPorAutorPeriodo) {
             System.out.println("Titulo: " + artigo.getTitulo() + ", Ano: " + artigo.getAno());
         }
+
+        artigo1.registaVisualizacao("2024-05");
+        System.out.println("\nArtigos não visualizados ou descarregados:");
+        for (Artigo artigo : bd.artigosNaoVisualizadosOuDescarregados("2024-05")) {
+            System.out.println("Título: " + artigo.getTitulo());
+        }
+
+        System.out.println("\nTop 3 Artigos mais usados em 2024-05:");
+        for (Artigo artigo : bd.top3ArtigosMaisUsados("2024-05")) {
+            System.out.println("Título: " + artigo.getTitulo() + ", Usos: " + artigo.getTotalUsosMensais("2024-05"));
+        }
+
+        System.out.println("\nLista de Artigos:");
+        for (Artigo artigo : bd.listarArtigos()) {
+            System.out.println("Título: " + artigo.getTitulo() + ", Publicado em: " + artigo.getLocal());
+            for (Autor autor : artigo.getAutores()) {
+                System.out.println("Autor: " + autor.getNome());
+            }
+        }
+
+        System.out.println("\nLista de Autores:");
+        for (Autor autor : bd.autores()) {
+            System.out.println("Nome: " + autor.getNome() + ", ORCID: " + autor.getOrcid());
+        }
+
+        System.out.println("\nLigações entre Artigos:");
+        for (Artigo artigo : bd.listarArtigos()) {
+            System.out.println("Artigo: " + artigo.getTitulo());
+            for (Autor autor : artigo.getAutores()) {
+                System.out.println("Autor: " + autor.getNome());
+            }
+        }
+
+        System.out.println("\nUtilização Mensal e Anual dos Artigos:");
+        for (Artigo artigo : bd.listarArtigos()) {
+            System.out.println("Artigo: " + artigo.getTitulo());
+            System.out.println("Visualizações Mensais: " + artigo.getVisualizacoesMensais("2024-05"));
+            System.out.println("Visualizações Anuais: " + artigo.getVisualizacoesAnuais(2024));
+            System.out.println("Likes: " + artigo.getVotos());
+        }
+
 
     }
 

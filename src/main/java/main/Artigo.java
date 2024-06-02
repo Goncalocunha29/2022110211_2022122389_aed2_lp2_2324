@@ -8,12 +8,12 @@ public class Artigo {
     private String resumo;
     private String tipoPublicacao;
     private int ano;
-    private int numDownloads;
     private List<Autor> autores;
     private List<Artigo> artigos;
     private Publicacao publicacao;
     private Map<String, Integer> visualizacoesMensais;
     private Map<Integer, Integer> visualizacoesAnuais;
+    private Map<String, Integer> downloadsMensais;
     private int votos;
     private String Id;
 
@@ -24,11 +24,11 @@ public class Artigo {
         this.resumo = resumo;
         this.tipoPublicacao = tipoPublicacao;
         this.ano = ano;
-        this.numDownloads = numDownloads;
         this.autores = new ArrayList<>();
         this.artigos = new ArrayList<>();
         this.visualizacoesMensais = new HashMap<>();
         this.visualizacoesAnuais = new HashMap<>();
+        this.downloadsMensais = new HashMap<>();
         this.votos = 0;
     }
 
@@ -103,6 +103,30 @@ public class Artigo {
 
     public String getId() {
         return Id;
+    }
+
+    public void registaVisualizacao(String mesAno) {
+        visualizacoesMensais.put(mesAno, visualizacoesMensais.getOrDefault(mesAno, 0) + 1);
+    }
+
+    public void registaDownload(String mesAno) {
+        downloadsMensais.put(mesAno, downloadsMensais.getOrDefault(mesAno, 0) + 1);
+    }
+
+    public int getDownloadsMensais(String mesAno) {
+        return downloadsMensais.getOrDefault(mesAno, 0);
+    }
+
+    public boolean foiVisualizadoNoPeriodo(String mesAno) {
+        return visualizacoesMensais.getOrDefault(mesAno, 0) > 0;
+    }
+
+    public boolean foiDescarregadoNoPeriodo(String mesAno) {
+        return downloadsMensais.getOrDefault(mesAno, 0) > 0;
+    }
+
+    public int getTotalUsosMensais(String mesAno) {
+        return getVisualizacoesMensais(mesAno) + getDownloadsMensais(mesAno);
     }
 
 }
